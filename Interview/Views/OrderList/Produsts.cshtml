@@ -1,0 +1,63 @@
+﻿@model  Interview.ViewModels.ItemList
+
+@{
+    ViewBag.Title = "Produsts";
+}
+
+<h2>Produsts</h2>
+
+<p>
+    
+</p>
+
+<body>
+    <div>
+        @using (Html.BeginForm("GetselectProducts", "OrderList", FormMethod.Post))
+        {
+            <table class="table table-striped table-bordered table-hover">
+                <tr style="background-color: #E8EEF4;">
+                    <td></td>
+                    <td>Order ID</td>
+                    <td>Order Item</td>
+                    <td>Price</td>
+                    <td>Cost</td>
+                    <td>Status</td>
+                </tr>
+                @foreach (var item in Model.items)
+                {
+                    <tr>
+                        @if (item.Ischeck == true)
+                        {
+                            <td>@Html.CheckBoxFor(modelItem => item.Ischeck, new { onclick = "return false" })</td>
+                        }
+                        else 
+                        {
+                            <td>@Html.CheckBoxFor(modelItem => item.Ischeck)</td>
+                        }
+                        <td>
+                            @item.ID
+                        </td>
+                        <td>
+                            @item.item
+                        </td>
+                        <td>
+                            @item.price
+                        </td>
+                        <td>
+                            @item.cost
+                        </td>
+                        <td>
+                            @item.status
+                        </td>
+                    </tr>
+                }
+            </table>
+            <div>
+                <input type="submit" value="Confirm" class="btn btn-default" />
+            </div>
+            @ViewBag.Loc
+        }
+    </div>
+
+</body>
+

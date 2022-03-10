@@ -1,0 +1,61 @@
+﻿@model Interview.ViewModels.OrderListViewModel
+
+@{
+    ViewBag.Title = "Order List";
+}
+
+<h2>Order List</h2>
+<body>
+    <div>
+        @using (Html.BeginForm("GetProdusts", "OrderList", FormMethod.Post))
+        {
+            <table class="table table-striped table-bordered table-hover">
+                <tr style="background-color: #E8EEF4;">
+                    <td></td>
+                    <td>Order ID</td>
+                    <td>Order Item</td>
+                    <td>Price</td>
+                    <td>Cost</td>
+                    <td>Status</td>
+                </tr>
+                @for (var i = 0; i < Model.OrderListData.Count; i++)
+                {
+                    <tr>
+                        @if (Model.OrderListData[i].Ischeck == true)
+                        {
+                            <td>@Html.CheckBoxFor(m => Model.OrderListData[i].Ischeck, new { onclick = "return false" })</td>
+                        }
+                        else
+                        {
+                            <td>@Html.CheckBoxFor(m => Model.OrderListData[i].Ischeck)</td>
+                        }
+                        <td>
+                            @Html.DisplayFor(m => Model.OrderListData[i].ID)
+                            @Html.HiddenFor(m => Model.OrderListData[i].ID)
+                            @Html.HiddenFor(m => Model.OrderListData[i].account)
+                        </td>
+                        <td>
+                            @Html.ActionLink(Model.OrderListData[i].item, "Details", "Getdetaildata", routeValues:new { id=Model.OrderListData[i].ID},htmlAttributes:null)
+                            @Html.HiddenFor(m => Model.OrderListData[i].item)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => Model.OrderListData[i].price)
+                            @Html.HiddenFor(m => Model.OrderListData[i].price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => Model.OrderListData[i].cost)
+                            @Html.HiddenFor(m => Model.OrderListData[i].cost)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => Model.OrderListData[i].status)
+                            @Html.HiddenFor(m => Model.OrderListData[i].status)
+                        </td>
+                    </tr>
+                }
+            </table>
+            <div>
+                <input type="submit" value="Confirm" class="btn btn-default" />
+            </div>
+        }
+    </div>
+</body>
